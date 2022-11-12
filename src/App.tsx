@@ -8,7 +8,6 @@ const App: FC = (): ReactElement => {
     <ThemeProvider theme={customTheme}>
       <CssBaseline />
       <Dashbaord />
-      Ready to build 🚀🔥
     </ThemeProvider>
   );
 };
