@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import { Profile } from "../profile/profile";
 import { CreateTaskForm } from "../createTaskForm/createTaskForm";
 
-export const Sidebar = () => {
+export const Sidebar: FC = (): ReactElement => {
   return (
     <Grid
       item
