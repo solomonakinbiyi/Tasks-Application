@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import React, { FC, ReactElement } from "react";
+import { TaskHeader } from "./_taskHeader";
 
 export const Task: FC = (props): ReactElement => {
   return (
@@ -18,7 +19,7 @@ export const Task: FC = (props): ReactElement => {
         borderColor: "error.light",
       }}
     >
-      Test
+      <TaskHeader />
     </Box>
   );
 };
