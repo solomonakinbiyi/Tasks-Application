@@ -1,10 +1,33 @@
 import React, { FC, ReactElement } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Box } from "@mui/material";
+import { format } from "date-fns";
 
 export const TaskArea: FC = (): ReactElement => {
   return (
     <Grid item md={8} px={4}>
-      <h1>Content area</h1>
+      <Box mb={8} px={4}>
+        <h1>Status of your Tasks as on {format(new Date(), "PPPP")}</h1>
+      </Box>
+      <Grid container display="flex" justifyContent="center">
+        <Grid
+          item
+          display="flex"
+          flexDirection="row"
+          justifyContent="space-around"
+          alignItems="center"
+          md={10}
+          xs={12}
+          mb={8}
+        >
+          <Box>Task completed</Box>
+          <Box>Task completed</Box>
+          <Box>Task completed</Box>
+        </Grid>
+        <Grid item display="flex" flexDirection="column" xs={10} md={8}>
+          <Box>Task will come over here</Box>
+          <Box>Task will come over here</Box>
+        </Grid>
+      </Grid>
     </Grid>
   );
 };
