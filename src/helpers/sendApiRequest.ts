@@ -1,6 +1,7 @@
 type Method = "GET" | "POST" | "PUT" | "DELETE";
 
 function returnCorrectRequest(method: Method, data: unknown): RequestInit {
+  // Only the request method is different, every other method is the same
   if (method === "GET") {
     return {
       method: method,
