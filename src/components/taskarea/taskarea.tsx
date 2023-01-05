@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from "react";
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, Alert } from "@mui/material";
 import { format } from "date-fns";
 import { TaskCounter } from "../taskCounter/taskCounter";
 import { Task } from "../task/task";
@@ -35,9 +35,24 @@ export const TaskArea: FC = (): ReactElement => {
           <TaskCounter />
         </Grid>
         <Grid item display="flex" flexDirection="column" xs={10} md={8}>
-          <Task />
-          <Task />
-          <Task />
+          <>
+            {error && (
+              <Alert severity="error">
+                There was an error fetching your tasks
+              </Alert>
+            )}
+
+            {!error && Array.isArray(data) && data.length === 0 && (
+              <Alert severity="error">
+                You do not have any tasks created yet. Start by creating some
+                tasks
+              </Alert>
+            )}
+
+            <Task id="123" />
+            <Task id="123" />
+            <Task id="123" />
+          </>
         </Grid>
       </Grid>
     </Grid>
