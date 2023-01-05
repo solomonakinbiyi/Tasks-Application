@@ -69,17 +69,26 @@ export const CreateTaskForm: FC = (): ReactElement => {
         Create a task
       </Typography>
       <Stack sx={{ width: "100%" }} spacing={2}>
-        <TaskTitleField onChange={(e) => setTitle(e.target.value)} />
+        <TaskTitleField
+          onChange={(e) => setTitle(e.target.value)}
+          disabled={createTaskMutation.isLoading}
+        />
         <TaskDescriptionField
           onChange={(e) => setDescription(e.target.value)}
+          disabled={createTaskMutation.isLoading}
         />
-        <TaskDateField value={date} onChange={(date) => setDate(date)} />
+        <TaskDateField
+          value={date}
+          onChange={(date) => setDate(date)}
+          disabled={createTaskMutation.isLoading}
+        />
         <Stack sx={{ width: "100%" }} direction="row" spacing={2}>
           <TaskSelectField
             label="Status"
             name="Status"
             value={status}
             onChange={(e) => setStatus(e.target.value as string)}
+            disabled={createTaskMutation.isLoading}
             items={[
               {
                 value: Status.todo,
@@ -96,6 +105,7 @@ export const CreateTaskForm: FC = (): ReactElement => {
             name="Priority"
             value={priority}
             onChange={(e) => setPriority(e.target.value as string)}
+            disabled={createTaskMutation.isLoading}
             items={[
               {
                 value: Priority.low,
@@ -112,8 +122,9 @@ export const CreateTaskForm: FC = (): ReactElement => {
             ]}
           />
         </Stack>
-        <LinearProgress />
+        {createTaskMutation.isLoading && <LinearProgress />}
         <Button
+          disabled={!title || !description || !date || !status || !priority}
           onClick={createTaskHandler}
           variant="contained"
           size="large"
