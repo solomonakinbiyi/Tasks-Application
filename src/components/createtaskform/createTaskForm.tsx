@@ -9,11 +9,11 @@ import { Priority } from "./enums/Priority";
 
 export const CreateTaskForm: FC = (): ReactElement => {
   // declare component states
-  const [title, setTitle] = useState<string | undefined>(undefined)
-  const [description, setDescription] = useState<string | undefined>(undefined)
-  const [date, setDate] = useState<Date | null>(null)
-  const [status, setStatus] = useState<string>(Status.todo)
-  const [priority, setPriority] = useState<string>(Priority.normal)
+  const [title, setTitle] = useState<string | undefined>(undefined);
+  const [description, setDescription] = useState<string | undefined>(undefined);
+  const [date, setDate] = useState<Date | null>(null);
+  const [status, setStatus] = useState<string>(Status.todo);
+  const [priority, setPriority] = useState<string>(Priority.normal);
 
   return (
     <Box
@@ -28,13 +28,17 @@ export const CreateTaskForm: FC = (): ReactElement => {
         Create a task
       </Typography>
       <Stack sx={{ width: "100%" }} spacing={2}>
-        <TaskTitleField />
-        <TaskDescriptionField />
-        <TaskDateField />
+        <TaskTitleField onChange={(e) => setTitle(e.target.value)} />
+        <TaskDescriptionField
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <TaskDateField value={date} onChange={(e) => setDate(date)} />
         <Stack sx={{ width: "100%" }} direction="row" spacing={2}>
           <TaskSelectField
             label="Status"
             name="Status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value as string)}
             items={[
               {
                 value: Status.todo,
@@ -49,6 +53,8 @@ export const CreateTaskForm: FC = (): ReactElement => {
           <TaskSelectField
             label="Priority"
             name="Priority"
+            value={priority}
+            onChange={(e) => setPriority(e.target.value as string)}
             items={[
               {
                 value: Priority.low,
