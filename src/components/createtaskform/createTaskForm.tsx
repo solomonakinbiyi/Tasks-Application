@@ -16,6 +16,7 @@ import { Status } from "./enums/Status";
 import { Priority } from "./enums/Priority";
 import { useMutation } from "@tanstack/react-query";
 import { sendApiRequest } from "../../helpers/sendApiRequest";
+import { ICreateTask } from "../taskArea/interfaces/ICreateTask";
 
 export const CreateTaskForm: FC = (): ReactElement => {
   // declare component states
@@ -26,9 +27,30 @@ export const CreateTaskForm: FC = (): ReactElement => {
   const [priority, setPriority] = useState<string>(Priority.normal);
 
   // create task mutation
-  const createTaskMutation = useMutation((data) =>
+  const createTaskMutation = useMutation((data: ICreateTask) =>
     sendApiRequest("http://localhost:3200/tasks", "POST", data)
   );
+
+  function createTaskHandler() {
+    if (!title || !date || !description) {
+      return;
+    }
+    console.log("Hello ", {
+      title,
+      description,
+      date: date.toString(),
+      status,
+      priority,
+    });
+    const task: ICreateTask = {
+      title,
+      description,
+      date: date.toString(),
+      status,
+      priority,
+    };
+    createTaskMutation.mutate(task);
+  }
 
   return (
     <Box
@@ -51,7 +73,7 @@ export const CreateTaskForm: FC = (): ReactElement => {
         <TaskDescriptionField
           onChange={(e) => setDescription(e.target.value)}
         />
-        <TaskDateField value={date} onChange={(e) => setDate(date)} />
+        <TaskDateField value={date} onChange={(date) => setDate(date)} />
         <Stack sx={{ width: "100%" }} direction="row" spacing={2}>
           <TaskSelectField
             label="Status"
@@ -91,7 +113,12 @@ export const CreateTaskForm: FC = (): ReactElement => {
           />
         </Stack>
         <LinearProgress />
-        <Button variant="contained" size="large" fullWidth>
+        <Button
+          onClick={createTaskHandler}
+          variant="contained"
+          size="large"
+          fullWidth
+        >
           Create A Task
         </Button>
       </Stack>
