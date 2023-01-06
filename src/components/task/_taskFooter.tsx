@@ -2,6 +2,7 @@ import React, { FC, ReactElement } from "react";
 import { Box, Button, FormControlLabel, Switch } from "@mui/material";
 import { ITaskFooter } from "./interfaces/ITaskFooter";
 import PropTypes from "prop-types";
+import { Status } from "../createTaskForm/enums/Status";
 
 export const TaskFooter: FC<ITaskFooter> = (props): ReactElement => {
   const {
@@ -20,7 +21,13 @@ export const TaskFooter: FC<ITaskFooter> = (props): ReactElement => {
     >
       <FormControlLabel
         label="In Progress"
-        control={<Switch onChange={(e) => onStatusChange(e)} color="warning" />}
+        control={
+          <Switch
+            onChange={(e) => onStatusChange(e)}
+            color="warning"
+            defaultChecked={status == Status.inProgress}
+          />
+        }
       />
       <Button
         variant="contained"
