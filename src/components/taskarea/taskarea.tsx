@@ -9,6 +9,7 @@ import { ITaskApi } from "./interfaces/ITaskApi";
 import { Status } from "../createTaskForm/enums/Status";
 
 export const TaskArea: FC = (): ReactElement => {
+  // useQuery to get data
   const { error, isLoading, data, refetch } = useQuery(["tasks"], async () => {
     return await sendApiRequest<ITaskApi[]>(
       "http://localhost:3200/tasks",
