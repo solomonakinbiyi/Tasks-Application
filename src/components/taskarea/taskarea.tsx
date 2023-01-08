@@ -3,14 +3,14 @@ import { Grid, Box, Alert, LinearProgress } from "@mui/material";
 import { format } from "date-fns";
 import { TaskCounter } from "../taskCounter/taskCounter";
 import { Task } from "../task/task";
-import { QueryKey, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { sendApiRequest } from "../../helpers/sendApiRequest";
 import { ITaskApi } from "./interfaces/ITaskApi";
 import { Status } from "../createTaskForm/enums/Status";
 
 export const TaskArea: FC = (): ReactElement => {
   // useQuery to get data
-  const { error, isLoading, data, refetch } = useQuery(["tasks"], async () => {
+  const { error, isLoading, data } = useQuery(["tasks"], async () => {
     return await sendApiRequest<ITaskApi[]>(
       "http://localhost:3200/tasks",
       "GET"
