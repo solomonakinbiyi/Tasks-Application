@@ -23,6 +23,16 @@ export const TaskArea: FC = (): ReactElement => {
     sendApiRequest("http://localhost:3200/tasks", "PUT", data)
   );
 
+  function onStatusChangeHandler(
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: string
+  ) {
+    updateTaskMutation.mutate({
+      id,
+      status: e.target.checked ? Status.inProgress : Status.todo,
+    });
+  }
+
   return (
     <Grid item md={8} px={4}>
       <Box mb={8} px={4}>
@@ -74,6 +84,7 @@ export const TaskArea: FC = (): ReactElement => {
                     description={each.description}
                     priority={each.priority}
                     status={each.status}
+                    onStatusChange={onStatusChangeHandler}
                   />
                 ) : (
                   false
