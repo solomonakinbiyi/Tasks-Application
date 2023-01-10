@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import { Sidebar } from "../../components/sidebar/sidebar";
 import { TaskArea } from "../../components/taskArea/taskArea";
 
+// the layout
 export const Dashbaord: FC = (): ReactElement => {
   return (
     <Grid container minHeight="100vh" p={0} m={0}>
